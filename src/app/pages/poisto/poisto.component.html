@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Varoitus!</h1>
+<div mat-dialog-content>
+  <p class="mat-body-1">Haluatko varmasti poistaa havainnon?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="primary">En</button>
+  <button mat-raised-button (click)="onDelete()" mat-dialog-close color="warn">
+    <mat-icon>delete</mat-icon> Kyllä
+  </button>
+</div>

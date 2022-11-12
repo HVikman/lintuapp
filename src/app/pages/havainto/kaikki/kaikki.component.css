@@ -1,0 +1,24 @@
+mat-card {
+  margin: auto;
+  width: 80%;
+}
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  border-bottom: 2px solid lightgray;
+}
+td {
+  border: 0px;
+  font-size: 12px;
+  border-bottom: 1px solid whitesmoke;
+  padding: 8px 5px;
+}
+.item:nth-child(odd) {
+  background-color: whitesmoke;
+}
+input[type="file"] {
+  visibility: hidden;
+}

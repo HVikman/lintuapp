@@ -1,0 +1,28 @@
+<mat-toolbar color="primary"
+  ><a routerLink="/" class="logo"> LintuApp</a> <span class="spacer"></span>
+
+  <mat-menu #appMenu="matMenu">
+    <h2 class="mat-subheading-1" *ngIf="userAuthenticated">
+      Terve {{ username }}
+    </h2>
+    <a routerLink="/auth/login" *ngIf="!userAuthenticated"
+      ><button mat-menu-item>Kirjaudu</button></a
+    >
+
+    <a routerLink="/auth/signup" *ngIf="!userAuthenticated">
+      <button mat-menu-item>Rekisteröidy</button></a
+    >
+
+    <a routerLink="/tools/kaikki" *ngIf="userAuthenticated">
+      <button mat-menu-item>Kaikki havainnot</button></a
+    >
+
+    <button *ngIf="userAuthenticated" (click)="onLogout()" mat-menu-item>
+      Kirjaudu ulos
+    </button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>

@@ -1,0 +1,10 @@
+mat-card {
+  width: 80%;
+  margin: auto;
+}
+mat-spinner {
+  margin: auto;
+}
+.spacer {
+  flex: 1 1 auto;
+}

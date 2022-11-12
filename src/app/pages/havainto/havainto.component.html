@@ -1,0 +1,233 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onNewHavainto(postForm)" #postForm="ngForm">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel
+        [expanded]="step === 0"
+        (opened)="setStep(0)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Laji </mat-panel-title>
+          <mat-panel-description> Havaitun linnun laji </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Laji</mat-label>
+          <input
+            type="text"
+            name="laji"
+            placeholder="Valitse laji"
+            aria-label="Laji"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+            required
+          />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="nextStep()"
+          >
+            Seuraava <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 1"
+        (opened)="setStep(1)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Montako? </mat-panel-title>
+          <mat-panel-description> Lintujen lukumäärä </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Määrä</mat-label>
+          <input
+            matInput
+            type="number"
+            value=""
+            name="maara"
+            ngModel
+            required
+          />
+        </mat-form-field>
+
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="prevStep()"
+            type="button"
+          >
+            <mat-icon>arrow_back_ios</mat-icon> Edellinen
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="nextStep()"
+            type="button"
+          >
+            Seuraava <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 2"
+        (opened)="setStep(2)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Paikkakunta </mat-panel-title>
+          <mat-panel-description>
+            Lintuhavainnon paikkakunta
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Paikkakunta</mat-label>
+          <input
+            type="text"
+            name="paikkakunta"
+            placeholder="Pick one"
+            aria-label="Paikkakunta"
+            matInput
+            [formControl]="myControl2"
+            [matAutocomplete]="auto2"
+            required
+          />
+          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+            <mat-option
+              *ngFor="let option2 of filteredOptions2 | async"
+              [value]="option2"
+            >
+              {{ option2 }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <span class="spacer"></span>
+        <mat-form-field appearance="fill">
+          <mat-label>Osoite/tarkempi paikka</mat-label>
+          <input matInput type="text" ngModel name="osoite" />
+        </mat-form-field>
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="prevStep()"
+            type="button"
+          >
+            <mat-icon>arrow_back_ios</mat-icon> Edellinen
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="nextStep()"
+            type="button"
+          >
+            Seuraava <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 3"
+        (opened)="setStep(3)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Päivämäärä</mat-panel-title>
+          <mat-panel-description>
+            Havainnon päivämäärä
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            [ngModel]="date"
+            name="date"
+            [matDatepicker]="picker"
+            (focus)="picker.open()"
+            readonly
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker [startAt]="date" touchUi #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="prevStep()"
+            type="button"
+          >
+            <mat-icon>arrow_back_ios</mat-icon> Edellinen
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="nextStep()"
+            type="button"
+          >
+            Seuraava <mat-icon>arrow_forward_ios</mat-icon>
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+        [expanded]="step === 4"
+        (opened)="setStep(4)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Lisätiedot</mat-panel-title>
+          <mat-panel-description>
+            Havainnon lisätiedot
+            <mat-icon>info</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Lisätiedot</mat-label>
+          <textarea matInput name="info" ngModel></textarea>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="prevStep()"
+            type="button"
+          >
+            <mat-icon>arrow_back_ios</mat-icon> Edellinen
+          </button>
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>save</mat-icon>Tallenna
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</mat-card>

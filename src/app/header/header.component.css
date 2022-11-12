@@ -1,0 +1,11 @@
+.logo {
+  text-decoration: none;
+  color: white;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+.spacer {
+  flex: 1 1 auto;
+}

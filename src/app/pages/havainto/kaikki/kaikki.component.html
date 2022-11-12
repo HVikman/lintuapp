@@ -1,0 +1,82 @@
+<mat-card>
+  <table id="excel-table" style="padding-top: 2rem">
+    <tr class="mat-subheading-1">
+      <th>Määrä</th>
+      <th>Laji</th>
+      <th>Päivämäärä</th>
+      <th>Paikkakunta</th>
+      <th>Osoite</th>
+      <th>Info</th>
+    </tr>
+    <tr class="item mat-body-1" *ngFor="let havainto of havainnot">
+      <td>{{ havainto.maara }}</td>
+      <td>{{ havainto.laji }}</td>
+      <td>{{ havainto.date }}</td>
+      <td>{{ havainto.paikkakunta }}</td>
+      <td>{{ havainto.osoite }}</td>
+      <td>{{ havainto.info }}</td>
+    </tr>
+  </table>
+  <br />
+
+  <button mat-raised-button color="accent" (click)="exportexcel()">
+    Vie tiedot excel tiedostoon
+  </button>
+
+  <br /><br /><br /><br />
+  <table style="padding-top: 2rem">
+    <tr class="mat-subheading-1">
+      <th>Määrä</th>
+      <th>Laji</th>
+      <th>Päivämäärä</th>
+      <th>Paikkakunta</th>
+      <th>Osoite</th>
+      <th>Info</th>
+    </tr>
+    <tr class="item mat-body-1" *ngFor="let havainto of importHavainnot">
+      <td>{{ havainto.maara }}</td>
+      <td>{{ havainto.laji }}</td>
+      <td>{{ havainto.date }}</td>
+      <td>{{ havainto.paikkakunta }}</td>
+      <td>{{ havainto.osoite }}</td>
+      <td>{{ havainto.info }}</td>
+    </tr>
+  </table>
+  <br />
+  <div>
+    <button
+      mat-raised-button
+      color="accent"
+      type="button"
+      (click)="filePicker.click()"
+    >
+      Tuo havainnot excel tiedostosta
+    </button>
+    <input type="file" #filePicker (change)="onFileChange($event)" />
+    <button
+      *ngIf="importHavainnot.length > 0"
+      mat-raised-button
+      color="accent"
+      type="button"
+      (click)="excelTietokantaan()"
+    >
+      Tallenna tuodut tiedot tietokantaan
+    </button>
+    <button
+      *ngIf="importHavainnot.length > 0"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="excelPeruuta()"
+    >
+      Peruuta
+    </button>
+    <br />
+    <br />
+    <span class="mat-body-2">
+      Tuotavan exceltiedoston sarakkeiden täytyy vastata ohjelman taulukon
+      sarakkeita. <br />Määrä, laji, päivämäärä ja paikkakunta on
+      pakollisia.</span
+    >
+  </div>
+</mat-card>

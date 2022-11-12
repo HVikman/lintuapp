@@ -1,0 +1,41 @@
+<mat-card class="demo-inline-calendar-card">
+  <mat-calendar
+    [(selected)]="selected"
+    (selectedChange)="addEvent()"
+  ></mat-calendar>
+
+  <!-- ----------------------------------------------------------------------- -->
+  <h1 *ngIf="userIsAuthenticated">Päivän {{ selectedFormatted }} linnut</h1>
+  <mat-accordion *ngIf="havainnot.length > 0 && !isLoading" multi="true">
+    <mat-expansion-panel *ngFor="let havainto of havainnot">
+      <mat-expansion-panel-header>
+        {{ havainto.maara }}kpl {{ havainto.laji }} --
+        {{ havainto.paikkakunta }}
+      </mat-expansion-panel-header>
+      <p *ngIf="havainto.osoite">Tarkempi paikka: {{ havainto.osoite }}</p>
+      <p>Lisätiedot: {{ havainto.info }}</p>
+      <mat-action-row>
+        <button mat-raised-button color="warn" (click)="onDelete(havainto.id)">
+          <mat-icon>delete </mat-icon>Poista
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-spinner *ngIf="havainnot.length <= 0 && isLoading"></mat-spinner>
+  <p
+    class="info-text mat-body-1"
+    *ngIf="havainnot.length <= 0 && !isLoading && userIsAuthenticated"
+  >
+    Ei havaintoja tällä päivämäärällä.
+  </p>
+
+  <a
+    mat-fab
+    class="addbutton"
+    color="primary"
+    routerLink="havainto"
+    *ngIf="userIsAuthenticated"
+  >
+    <mat-icon>add</mat-icon>
+  </a>
+</mat-card>

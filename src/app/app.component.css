@@ -1,0 +1,7 @@
+main {
+  margin: auto;
+}
+html {
+  overscroll-behavior: contain;
+  touch-action: manipulation;
+}

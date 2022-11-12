@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">lintu</string>
+    <string name="title_activity_main">lintu</string>
+    <string name="package_name">com.lintuapp.app</string>
+    <string name="custom_url_scheme">com.lintuapp.app</string>
+</resources>

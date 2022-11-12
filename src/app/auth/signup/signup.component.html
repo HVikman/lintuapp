@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        name="username"
+        ngModel
+        type="text"
+        placeholder="Käyttäjänimi"
+        #usernameInput="ngModel"
+        required
+      />
+      <mat-error *ngIf="emailInput.invalid"
+        >Syötä kelvollinen käyttäjänimi.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        name="email"
+        ngModel
+        type="email"
+        placeholder="Sähköposti"
+        #emailInput="ngModel"
+        required
+        email
+      />
+      <mat-error *ngIf="emailInput.invalid"
+        >Syötä kelvollinen sähköposti.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        type="password"
+        matInput
+        name="password"
+        placeholder="Salasana"
+        ngModel
+        #passwordInput="ngModel"
+        required
+        minlength="4"
+      />
+      <mat-error *ngIf="passwordInput.invalid">Syötä salasana</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" *ngIf="!isLoading">
+      Rekisteröidy
+    </button>
+  </form>
+</mat-card>
